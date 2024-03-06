@@ -45,7 +45,10 @@ class bioDataController extends Controller
         // Retrieve all registration records from the database
         $bioData = bioDataModel::all();
 
-        // Return a response with the fetched data
-        return response()->json(['message' => 'Fetched Bio data successfully', 'data' => $bioData, "status" => true], 200);
+        if ($bioData->isEmpty()) {
+            return response()->json(['message' => 'No Bio data are available', 'status' => false], 404);
+        } else {
+            return response()->json(['message' => 'Bio Data Fetched Successfully', 'data' => $bioData, 'status' => true], 200);
+        }
     }
 }

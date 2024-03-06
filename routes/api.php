@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\bioDataController;
+use App\Http\Controllers\Complaint_Controller;
 use App\Http\Controllers\registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,3 +32,9 @@ Route::get('/getRegisterData/{user_type}', [registration::class, 'fetchByUserTyp
 Route::post('/addBioData', [bioDataController::class, 'addBioData']);
 
 Route::get('/getBioData', [bioDataController::class, 'fetchBioData']);
+
+Route::post('/addComplaint', [Complaint_Controller::class, 'addComplaint']);
+
+Route::get('/getComplaint', [Complaint_Controller::class, 'getComplaint']);
+
+Route::get('/getComplaint/{bio_id}', [Complaint_Controller::class, 'getComplaintByBioId']);
