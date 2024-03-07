@@ -33,6 +33,8 @@ Route::post('/addBioData', [bioDataController::class, 'addBioData']);
 
 Route::get('/getBioData', [bioDataController::class, 'fetchBioData']);
 
+Route::get('/getBioData/{user_id}', [bioDataController::class, 'getBioDataByUserId']);
+
 Route::post('/addComplaint', [Complaint_Controller::class, 'addComplaint']);
 
 Route::get('/getComplaint', [Complaint_Controller::class, 'getComplaint']);

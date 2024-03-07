@@ -51,4 +51,16 @@ class bioDataController extends Controller
             return response()->json(['message' => 'Bio Data Fetched Successfully', 'data' => $bioData, 'status' => true], 200);
         }
     }
+
+    public function getBioDataByUserId($user_id)
+    {
+        $bioData = bioDataModel::where('user_id', $user_id)->get();
+
+
+        if ($bioData->isEmpty()) {
+            return response()->json(['message' => 'No Bio Data are available', 'status' => false], 404);
+        } else {
+            return response()->json(['message' => 'Bio Data Fetched Successfully', 'data' => $bioData, 'status' => true], 200);
+        }
+    }
 }
