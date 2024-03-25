@@ -12,7 +12,6 @@ class bioDataController extends Controller
 
     public function addBioData(Request $request)
     {
-
         $bioData = new bioDataModel;
 
         // Assign values to the model attributes
@@ -29,16 +28,33 @@ class bioDataController extends Controller
         $bioData->adhar_no = $request->input('adhar_no');
         $bioData->contact_no = $request->input('contact_no');
         $bioData->expectations = $request->input('expectations');
-        $bioData->upload_bio_data = $request->input('upload_bio_data');
         $bioData->user_type = $request->input('user_type');
         $bioData->trans_from = $request->input('trans_from');
+
+        // Handle Image upload
+        if ($request->hasFile('upload_image')) {
+            $file = $request->file('upload_image');
+            $fileName = $file->getClientOriginalName(); // You can modify this as needed
+            $filePath = $file->storeAs('public/image', $fileName); // Assuming 'uploads' is the directory where you want to store the files
+            $bioData->upload_bio_data = $filePath;
+        }
+
+        // Handle file upload
+        if ($request->hasFile('upload_bio_data')) {
+            $file = $request->file('upload_bio_data');
+            $fileName = $file->getClientOriginalName(); // You can modify this as needed
+            $filePath = $file->storeAs('public/biodata', $fileName);
+            $bioData->upload_bio_data = $filePath;
+        }
+
+
         // Save the model to the database
         $bioData->save();
 
-
         // Return a response
-        return response()->json(['message' => 'BioData saved successfull', 'data' => $bioData, "status" => true], 201);
+        return response()->json(['message' => 'BioData saved successfully', 'data' => $bioData, 'status' => true], 201);
     }
+
 
     public function fetchBioData()
     {

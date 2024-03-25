@@ -25,6 +25,7 @@ class bioDataModel extends Model
         "village",
         "adhar_no",
         "contact_no",
+        "upload_image",
         "expectations",
         "upload_bio_data",
         "user_type",
